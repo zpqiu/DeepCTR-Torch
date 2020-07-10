@@ -217,11 +217,11 @@ class BaseModel(nn.Module):
                         optim.zero_grad()
                         loss = loss_func(y_pred, y.squeeze(), reduction='sum')
 
-                        total_loss = loss + self.reg_loss + self.aux_loss
+                        total_loss = loss # + self.reg_loss + self.aux_loss
 
                         loss_epoch += loss.item()
                         total_loss_epoch += total_loss.item()
-                        total_loss.backward(retain_graph=True)
+                        total_loss.backward()
                         optim.step()
 
                         if verbose > 0:
